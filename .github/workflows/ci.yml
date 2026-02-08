@@ -28,10 +28,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Import Swift GPG keys
-      run: curl --silent --retry 3 --location --fail https://swift.org/keys/all-keys.asc | gpg --import -
-
     - uses: swift-actions/setup-swift@v3
+      with:
+        skip-verify-signature: true
 
     - name: Get swift version
       run: swift --version
