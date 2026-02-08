@@ -4,18 +4,18 @@ Pure Swift math library for game development with zero platform dependencies.
 
 [![CI](https://github.com/EmmanuelTsouris/GameMath/actions/workflows/ci.yml/badge.svg)](https://github.com/EmmanuelTsouris/GameMath/actions/workflows/ci.yml)
 [![Swift](https://img.shields.io/badge/Swift-6.2-orange.svg)](https://swift.org)
-[![Platforms](https://img.shields.io/badge/Platforms-iOS%20|%20macOS%20|%20tvOS%20|%20visionOS-lightgray.svg)](https://swift.org)
+[![Platforms](https://img.shields.io/badge/Platforms-iOS%20|%20macOS%20|%20tvOS%20|%20visionOS%20|%20Linux-lightgray.svg)](https://swift.org)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ## Features
 
-- ✅ **SIMD-backed vector types** (Vector2D, Vector3D) for high performance
+- ✅ **SIMD-backed vector types** (Vector2D, Vector3D) using Swift's built-in SIMD for high performance
 - ✅ **Collision detection** primitives (AABB, Circle, Ray)
 - ✅ **Interpolation utilities** (lerp, smoothstep, cubic bezier, easing functions)
 - ✅ **Seeded random generation** for deterministic gameplay
 - ✅ **Math helpers** (clamping, remapping, angle normalization)
 - ✅ **Swift 6.2 strict concurrency** - all types are Sendable
-- ✅ **Cross-platform** - compiles on iOS, macOS, tvOS, visionOS, and Linux
+- ✅ **Cross-platform** - works on iOS, macOS, tvOS, visionOS, and Linux
 
 ## Installation
 
@@ -176,16 +176,14 @@ randomBool()
 ## Requirements
 
 - Swift 6.2+
-- iOS 26.2+ / macOS 26.2+ / tvOS 26.2+ / visionOS 26.2+
+- iOS 26.2+ / macOS 26.2+ / tvOS 26.2+ / visionOS 26.2+ / Linux
 - Xcode 26.3+ (for Apple platforms)
-
-**Note:** GameMath requires Apple's SIMD framework and is not compatible with Linux.
 
 ## Why GameMath?
 
 - **Foundation-only**: No UIKit, AppKit, or SpriteKit dependencies
-- **SIMD-optimized**: Leverages Apple's SIMD framework for performance
-- **Apple platforms only**: Designed specifically for iOS, macOS, tvOS, and visionOS
+- **SIMD-optimized**: Uses Swift's built-in SIMD types for high performance
+- **Cross-platform**: Works on all Apple platforms plus Linux
 - **Deterministic**: Seeded RNG ensures reproducible gameplay
 - **Sendable-safe**: Full Swift 6.2 concurrency support
 - **Well-tested**: Comprehensive test suite with swift-testing

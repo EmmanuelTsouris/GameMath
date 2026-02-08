@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import simd
 
 /// A 3D vector backed by SIMD for performance
 public struct Vector3D: Sendable, Hashable, Codable {
@@ -83,12 +82,12 @@ public struct Vector3D: Sendable, Hashable, Codable {
 
     /// Length (magnitude) of the vector
     public var length: Float {
-        simd_length(storage)
+        storage.length
     }
 
     /// Squared length (avoids sqrt, useful for comparisons)
     public var lengthSquared: Float {
-        simd_length_squared(storage)
+        storage.lengthSquared
     }
 
     /// Normalized vector (length = 1), or zero if length is zero
@@ -111,32 +110,32 @@ public struct Vector3D: Sendable, Hashable, Codable {
 
     /// Distance to another vector
     public func distance(to other: Vector3D) -> Float {
-        simd_distance(storage, other.storage)
+        storage.distance(to: other.storage)
     }
 
     /// Squared distance (avoids sqrt, useful for comparisons)
     public func distanceSquared(to other: Vector3D) -> Float {
-        simd_distance_squared(storage, other.storage)
+        storage.distanceSquared(to: other.storage)
     }
 
     /// Dot product with another vector
     public func dot(_ other: Vector3D) -> Float {
-        simd_dot(storage, other.storage)
+        storage.dot(other.storage)
     }
 
     /// Cross product with another vector
     public func cross(_ other: Vector3D) -> Vector3D {
-        Vector3D(simd_cross(storage, other.storage))
+        Vector3D(storage.cross(other.storage))
     }
 
     /// Linear interpolation to another vector
     public func lerp(to other: Vector3D, t: Float) -> Vector3D {
-        Vector3D(simd_mix(storage, other.storage, SIMD3<Float>(repeating: t)))
+        Vector3D(storage.mix(other.storage, t: t))
     }
 
     /// Reflects vector across a normal
     public func reflect(across normal: Vector3D) -> Vector3D {
-        Vector3D(simd_reflect(storage, normal.storage))
+        Vector3D(storage.reflect(normal.storage))
     }
 
     /// Projects vector onto another vector
@@ -149,7 +148,7 @@ public struct Vector3D: Sendable, Hashable, Codable {
 
     /// Clamps vector components to a range
     public func clamped(min: Vector3D, max: Vector3D) -> Vector3D {
-        Vector3D(simd_clamp(storage, min.storage, max.storage))
+        Vector3D(storage.clamped(lowerBound: min.storage, upperBound: max.storage))
     }
 }
 

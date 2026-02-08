@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import simd
 
 /// A 2D vector backed by SIMD for performance
 public struct Vector2D: Sendable, Hashable, Codable {
@@ -66,12 +65,12 @@ public struct Vector2D: Sendable, Hashable, Codable {
 
     /// Length (magnitude) of the vector
     public var length: Float {
-        simd_length(storage)
+        storage.length
     }
 
     /// Squared length (avoids sqrt, useful for comparisons)
     public var lengthSquared: Float {
-        simd_length_squared(storage)
+        storage.lengthSquared
     }
 
     /// Normalized vector (length = 1), or zero if length is zero
@@ -94,17 +93,17 @@ public struct Vector2D: Sendable, Hashable, Codable {
 
     /// Distance to another vector
     public func distance(to other: Vector2D) -> Float {
-        simd_distance(storage, other.storage)
+        storage.distance(to: other.storage)
     }
 
     /// Squared distance (avoids sqrt, useful for comparisons)
     public func distanceSquared(to other: Vector2D) -> Float {
-        simd_distance_squared(storage, other.storage)
+        storage.distanceSquared(to: other.storage)
     }
 
     /// Dot product with another vector
     public func dot(_ other: Vector2D) -> Float {
-        simd_dot(storage, other.storage)
+        storage.dot(other.storage)
     }
 
     /// Cross product magnitude (2D cross product returns scalar)
@@ -114,12 +113,12 @@ public struct Vector2D: Sendable, Hashable, Codable {
 
     /// Linear interpolation to another vector
     public func lerp(to other: Vector2D, t: Float) -> Vector2D {
-        Vector2D(simd_mix(storage, other.storage, SIMD2<Float>(repeating: t)))
+        Vector2D(storage.mix(other.storage, t: t))
     }
 
     /// Reflects vector across a normal
     public func reflect(across normal: Vector2D) -> Vector2D {
-        Vector2D(simd_reflect(storage, normal.storage))
+        Vector2D(storage.reflect(normal.storage))
     }
 
     /// Projects vector onto another vector
@@ -132,7 +131,7 @@ public struct Vector2D: Sendable, Hashable, Codable {
 
     /// Clamps vector components to a range
     public func clamped(min: Vector2D, max: Vector2D) -> Vector2D {
-        Vector2D(simd_clamp(storage, min.storage, max.storage))
+        Vector2D(storage.clamped(lowerBound: min.storage, upperBound: max.storage))
     }
 
     /// Creates vector from angle and length

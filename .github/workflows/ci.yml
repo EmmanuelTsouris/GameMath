@@ -7,16 +7,27 @@ on:
     branches: [ main ]
 
 jobs:
-  macos:
-    name: macOS
-    runs-on: macos-latest
+  build:
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+
+    runs-on: ${{ matrix.os }}
 
     steps:
+    - uses: actions/checkout@v4
+
     - uses: swift-actions/setup-swift@v3
+      with:
+        # Skip signature verification on Linux due to key import issues
+        # This is acceptable for CI testing purposes
+        skip-verify-signature: ${{ runner.os == 'Linux' }}
+
     - name: Get swift version
       run: swift --version
-    - uses: actions/checkout@v4
+
     - name: Build
       run: swift build -v
+
     - name: Run tests
       run: swift test -v
