@@ -50,4 +50,4 @@ import Foundation
 // (All types are already public in their respective files)
 
 /// Current version of GameMath
-public let gameMathVersion = "1.1.0"
+public let gameMathVersion = "1.2.0"
