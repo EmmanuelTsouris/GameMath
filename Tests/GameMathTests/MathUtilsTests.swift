@@ -43,6 +43,21 @@ func testRemap() {
     #expect(remap(10.0, from: 0, 10, to: 50, 100) == 100.0)
 }
 
+@Test("remapClamped function")
+func testRemapClamped() {
+    // Remap 25 from [0, 100] to [0, 1] → 0.25
+    #expect(remapClamped(25.0, from: (0, 100), to: (0, 1)) == 0.25)
+
+    // Remap 150 from [0, 100] to [0, 1] → 1.0 (clamped)
+    #expect(remapClamped(150.0, from: (0, 100), to: (0, 1)) == 1.0)
+
+    // Remap -50 from [0, 100] to [0, 1] → 0.0 (clamped)
+    #expect(remapClamped(-50.0, from: (0, 100), to: (0, 1)) == 0.0)
+
+    // Reverse range: remap 75 from [0, 100] to [1, 0] → 0.25
+    #expect(remapClamped(75.0, from: (0, 100), to: (1, 0)) == 0.25)
+}
+
 @Test("fract function")
 func testFract() {
     #expect(abs(fract(3.14) - 0.14) < 0.0001)
