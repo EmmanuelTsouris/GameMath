@@ -43,6 +43,35 @@ func testRemap() {
     #expect(remap(10.0, from: 0, 10, to: 50, 100) == 100.0)
 }
 
+@Test("remapClamped function")
+func testRemapClamped() {
+    // Basic remapping
+    #expect(remapClamped(25.0, from: (0, 100), to: (0, 1)) == 0.25)
+
+    // Upper bound clamping
+    #expect(remapClamped(150.0, from: (0, 100), to: (0, 1)) == 1.0)
+
+    // Lower bound clamping
+    #expect(remapClamped(-50.0, from: (0, 100), to: (0, 1)) == 0.0)
+
+    // Reverse target range
+    #expect(remapClamped(75.0, from: (0, 100), to: (1, 0)) == 0.25)
+
+    // Reverse source range
+    #expect(remapClamped(25.0, from: (100, 0), to: (0, 1)) == 0.75)
+
+    // Negative ranges
+    #expect(remapClamped(-50.0, from: (-100, 0), to: (0, 1)) == 0.5)
+    #expect(remapClamped(-75.0, from: (-100, 0), to: (0, 1)) == 0.25)
+
+    // Zero-width target range (should return constant)
+    #expect(remapClamped(50.0, from: (0, 100), to: (5, 5)) == 5.0)
+
+    // Zero-width source range (NaN becomes max after clamp)
+    #expect(remapClamped(50.0, from: (50, 50), to: (0, 1)) == 1.0)
+    #expect(remapClamped(100.0, from: (100, 100), to: (-5, 5)) == 5.0)
+}
+
 @Test("fract function")
 func testFract() {
     #expect(abs(fract(3.14) - 0.14) < 0.0001)
