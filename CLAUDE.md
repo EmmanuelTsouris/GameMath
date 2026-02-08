@@ -55,6 +55,21 @@ The core design wraps Swift's `SIMD2<Float>` and `SIMD3<Float>` types:
 - **MathUtils.swift**: Interpolation, easing, angle utilities, clamping, remapping
 - **RandomUtils.swift**: Seeded RNG (Xorshift64*) for deterministic gameplay
 
+## File Size Rules
+
+Maximum 200 lines per Swift file. If a file approaches 200 lines, split it.
+
+Split strategy:
+- Extensions go in separate files
+- One type per file. One protocol per file
+- Tests mirror source
+
+Why: Every file in this repo will be read by AI agents. A 1000-line file
+burns context window on code irrelevant to the current task. Five 200-line
+files let the agent load only what it needs.
+
+Hard rule: If `wc -l` on any Swift file exceeds 250, the PR is rejected.
+
 ## Key Guidelines
 
 - Test edge cases: zero vectors, divide by zero, NaN, infinity, negative values
