@@ -103,6 +103,52 @@ func testEasingFunctions() {
 
     #expect(easeInOutCubic(0.0) == 0.0)
     #expect(easeInOutCubic(1.0) == 1.0)
+
+    // Quartic
+    #expect(easeInQuartic(0.0) == 0.0)
+    #expect(easeInQuartic(1.0) == 1.0)
+
+    #expect(easeOutQuartic(0.0) == 0.0)
+    #expect(easeOutQuartic(1.0) == 1.0)
+
+    // Quintic
+    #expect(easeInQuintic(0.0) == 0.0)
+    #expect(easeInQuintic(1.0) == 1.0)
+
+    // Sine
+    #expect(abs(easeInSine(0.0)) < 0.0001)
+    #expect(abs(easeInSine(1.0) - 1.0) < 0.0001)
+
+    #expect(abs(easeOutSine(0.0)) < 0.0001)
+    #expect(abs(easeOutSine(1.0) - 1.0) < 0.0001)
+
+    // Circular
+    #expect(abs(easeInCircular(0.0)) < 0.0001)
+    #expect(abs(easeInCircular(1.0) - 1.0) < 0.0001)
+
+    // Back
+    #expect(easeInBack(0.0) == 0.0)
+    #expect(abs(easeInBack(1.0) - 1.0) < 0.0001)
+
+    // Bounce
+    #expect(abs(easeOutBounce(0.0)) < 0.0001)
+    #expect(abs(easeOutBounce(1.0) - 1.0) < 0.0001)
+}
+
+@Test("sign function")
+func testSign() {
+    #expect(sign(5.0) == 1.0)
+    #expect(sign(-5.0) == -1.0)
+    #expect(sign(0.0) == 1.0)
+}
+
+@Test("randomSign function")
+func testRandomSign() {
+    // Test that randomSign returns either 1 or -1
+    for _ in 0..<100 {
+        let value = randomSign()
+        #expect(value == 1.0 || value == -1.0)
+    }
 }
 
 @Test("approximate equality")

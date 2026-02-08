@@ -124,10 +124,18 @@ smootherstep(0.0, 10.0, 0.5)  // Even smoother
 // Cubic bezier
 cubicBezier(0.0, 3.0, 7.0, 10.0, t: 0.5)
 
-// Easing functions
+// Easing functions (based on Robert Penner's equations)
 easeInQuad(t), easeOutQuad(t), easeInOutQuad(t)
 easeInCubic(t), easeOutCubic(t), easeInOutCubic(t)
+easeInQuartic(t), easeOutQuartic(t), easeInOutQuartic(t)
+easeInQuintic(t), easeOutQuintic(t), easeInOutQuintic(t)
+easeInSine(t), easeOutSine(t), easeInOutSine(t)
+easeInCircular(t), easeOutCircular(t), easeInOutCircular(t)
 easeInExpo(t), easeOutExpo(t), easeInOutExpo(t)
+easeInElastic(t), easeOutElastic(t), easeInOutElastic(t)
+easeInBack(t), easeOutBack(t), easeInOutBack(t)
+easeInExtremeBack(t), easeOutExtremeBack(t), easeInOutExtremeBack(t)
+easeInBounce(t), easeOutBounce(t), easeInOutBounce(t)
 ```
 
 ### Math Utilities
@@ -147,6 +155,10 @@ radiansToDegrees(.pi)  // 180
 // Comparison
 isApproximatelyEqual(a, b, epsilon: 0.0001)
 isApproximatelyZero(value)
+
+// Sign utilities
+sign(value)  // Returns 1.0 or -1.0
+randomSign()  // Random 1.0 or -1.0
 ```
 
 ### Random Generation
@@ -187,6 +199,14 @@ randomBool()
 - **Deterministic**: Seeded RNG ensures reproducible gameplay
 - **Sendable-safe**: Full Swift 6.2 concurrency support
 - **Well-tested**: Comprehensive test suite with swift-testing
+
+## Credits
+
+GameMath includes easing functions adapted from:
+- **Robert Penner's Easing Equations** (http://robertpenner.com/easing/)
+- **Razeware LLC's SKTUtils** (MIT License) - https://github.com/raywenderlich/SKTUtils
+
+Thank you to the open-source community for these battle-tested implementations!
 
 ## Contributing
 

@@ -219,3 +219,272 @@ public func isApproximatelyEqual<T: BinaryFloatingPoint>(_ a: T, _ b: T, epsilon
 public func isApproximatelyZero<T: BinaryFloatingPoint>(_ value: T, epsilon: T = T(1e-5)) -> Bool {
     abs(value) < epsilon
 }
+
+// MARK: - Additional Easing Functions
+// Based on Robert Penner's easing equations (http://robertpenner.com/easing/)
+// Implementation adapted from Razeware LLC's SKTUtils (MIT License)
+// https://github.com/raywenderlich/SKTUtils
+
+/// Ease-in quartic (4th power)
+public func easeInQuartic<T: BinaryFloatingPoint>(_ t: T) -> T {
+    t * t * t * t
+}
+
+/// Ease-out quartic
+public func easeOutQuartic<T: BinaryFloatingPoint>(_ t: T) -> T {
+    let f = t - 1
+    return 1 - f * f * f * f
+}
+
+/// Ease-in-out quartic
+public func easeInOutQuartic<T: BinaryFloatingPoint>(_ t: T) -> T {
+    if t < 0.5 {
+        return 8 * t * t * t * t
+    } else {
+        let f = t - 1
+        return 1 - 8 * f * f * f * f
+    }
+}
+
+/// Ease-in quintic (5th power)
+public func easeInQuintic<T: BinaryFloatingPoint>(_ t: T) -> T {
+    t * t * t * t * t
+}
+
+/// Ease-out quintic
+public func easeOutQuintic<T: BinaryFloatingPoint>(_ t: T) -> T {
+    let f = t - 1
+    return 1 + f * f * f * f * f
+}
+
+/// Ease-in-out quintic
+public func easeInOutQuintic<T: BinaryFloatingPoint>(_ t: T) -> T {
+    if t < 0.5 {
+        return 16 * t * t * t * t * t
+    } else {
+        let f = t - 1
+        return 1 + 16 * f * f * f * f * f
+    }
+}
+
+/// Ease-in sine
+public func easeInSine(_ t: Float) -> Float {
+    sin((t - 1) * .pi / 2) + 1
+}
+
+/// Ease-out sine
+public func easeOutSine(_ t: Float) -> Float {
+    sin(t * .pi / 2)
+}
+
+/// Ease-in-out sine
+public func easeInOutSine(_ t: Float) -> Float {
+    0.5 * (1 - cos(t * .pi))
+}
+
+/// Ease-in sine (Double version)
+public func easeInSine(_ t: Double) -> Double {
+    sin((t - 1) * .pi / 2) + 1
+}
+
+/// Ease-out sine (Double version)
+public func easeOutSine(_ t: Double) -> Double {
+    sin(t * .pi / 2)
+}
+
+/// Ease-in-out sine (Double version)
+public func easeInOutSine(_ t: Double) -> Double {
+    0.5 * (1 - cos(t * .pi))
+}
+
+/// Ease-in circular
+public func easeInCircular(_ t: Float) -> Float {
+    1 - sqrt(1 - t * t)
+}
+
+/// Ease-out circular
+public func easeOutCircular(_ t: Float) -> Float {
+    sqrt((2 - t) * t)
+}
+
+/// Ease-in-out circular
+public func easeInOutCircular(_ t: Float) -> Float {
+    if t < 0.5 {
+        return 0.5 * (1 - sqrt(1 - 4 * t * t))
+    } else {
+        return 0.5 * sqrt(-4 * t * t + 8 * t - 3) + 0.5
+    }
+}
+
+/// Ease-in circular (Double version)
+public func easeInCircular(_ t: Double) -> Double {
+    1 - sqrt(1 - t * t)
+}
+
+/// Ease-out circular (Double version)
+public func easeOutCircular(_ t: Double) -> Double {
+    sqrt((2 - t) * t)
+}
+
+/// Ease-in-out circular (Double version)
+public func easeInOutCircular(_ t: Double) -> Double {
+    if t < 0.5 {
+        return 0.5 * (1 - sqrt(1 - 4 * t * t))
+    } else {
+        return 0.5 * sqrt(-4 * t * t + 8 * t - 3) + 0.5
+    }
+}
+
+/// Ease-in elastic (springy overshoot)
+public func easeInElastic(_ t: Float) -> Float {
+    sin(13 * .pi / 2 * t) * Foundation.pow(2, 10 * (t - 1))
+}
+
+/// Ease-out elastic
+public func easeOutElastic(_ t: Float) -> Float {
+    sin(-13 * .pi / 2 * (t + 1)) * Foundation.pow(2, -10 * t) + 1
+}
+
+/// Ease-in-out elastic
+public func easeInOutElastic(_ t: Float) -> Float {
+    if t < 0.5 {
+        return 0.5 * sin(13 * .pi * t) * Foundation.pow(2, 20 * t - 10)
+    } else {
+        return 0.5 * sin(-13 * .pi * t) * Foundation.pow(2, -20 * t + 10) + 1
+    }
+}
+
+/// Ease-in elastic (Double version)
+public func easeInElastic(_ t: Double) -> Double {
+    sin(13 * .pi / 2 * t) * Foundation.pow(2, 10 * (t - 1))
+}
+
+/// Ease-out elastic (Double version)
+public func easeOutElastic(_ t: Double) -> Double {
+    sin(-13 * .pi / 2 * (t + 1)) * Foundation.pow(2, -10 * t) + 1
+}
+
+/// Ease-in-out elastic (Double version)
+public func easeInOutElastic(_ t: Double) -> Double {
+    if t < 0.5 {
+        return 0.5 * sin(13 * .pi * t) * Foundation.pow(2, 20 * t - 10)
+    } else {
+        return 0.5 * sin(-13 * .pi * t) * Foundation.pow(2, -20 * t + 10) + 1
+    }
+}
+
+/// Ease-in back (slight overshoot)
+public func easeInBack<T: BinaryFloatingPoint>(_ t: T) -> T {
+    let s: T = 1.70158
+    return ((s + 1) * t - s) * t * t
+}
+
+/// Ease-out back
+public func easeOutBack<T: BinaryFloatingPoint>(_ t: T) -> T {
+    let s: T = 1.70158
+    let f = 1 - t
+    return 1 - ((s + 1) * f - s) * f * f
+}
+
+/// Ease-in-out back
+public func easeInOutBack<T: BinaryFloatingPoint>(_ t: T) -> T {
+    let s: T = 1.70158
+    if t < 0.5 {
+        let f = 2 * t
+        return 0.5 * ((s + 1) * f - s) * f * f
+    } else {
+        let f = 2 * (1 - t)
+        return 1 - 0.5 * ((s + 1) * f - s) * f * f
+    }
+}
+
+/// Ease-in extreme back (pronounced overshoot)
+public func easeInExtremeBack(_ t: Float) -> Float {
+    (t * t - sin(t * .pi)) * t
+}
+
+/// Ease-out extreme back
+public func easeOutExtremeBack(_ t: Float) -> Float {
+    let f = 1 - t
+    return 1 - (f * f - sin(f * .pi)) * f
+}
+
+/// Ease-in-out extreme back
+public func easeInOutExtremeBack(_ t: Float) -> Float {
+    if t < 0.5 {
+        let f = 2 * t
+        return 0.5 * (f * f - sin(f * .pi)) * f
+    } else {
+        let f = 2 * (1 - t)
+        return 1 - 0.5 * (f * f - sin(f * .pi)) * f
+    }
+}
+
+/// Ease-in extreme back (Double version)
+public func easeInExtremeBack(_ t: Double) -> Double {
+    (t * t - sin(t * .pi)) * t
+}
+
+/// Ease-out extreme back (Double version)
+public func easeOutExtremeBack(_ t: Double) -> Double {
+    let f = 1 - t
+    return 1 - (f * f - sin(f * .pi)) * f
+}
+
+/// Ease-in-out extreme back (Double version)
+public func easeInOutExtremeBack(_ t: Double) -> Double {
+    if t < 0.5 {
+        let f = 2 * t
+        return 0.5 * (f * f - sin(f * .pi)) * f
+    } else {
+        let f = 2 * (1 - t)
+        return 1 - 0.5 * (f * f - sin(f * .pi)) * f
+    }
+}
+
+/// Ease-in bounce (bouncing ball effect)
+public func easeInBounce<T: BinaryFloatingPoint>(_ t: T) -> T {
+    1 - easeOutBounce(1 - t)
+}
+
+/// Ease-out bounce
+public func easeOutBounce<T: BinaryFloatingPoint>(_ t: T) -> T {
+    if t < 1 / 2.75 {
+        return 7.5625 * t * t
+    } else if t < 2 / 2.75 {
+        let f = t - 1.5 / 2.75
+        return 7.5625 * f * f + 0.75
+    } else if t < 2.5 / 2.75 {
+        let f = t - 2.25 / 2.75
+        return 7.5625 * f * f + 0.9375
+    } else {
+        let f = t - 2.625 / 2.75
+        return 7.5625 * f * f + 0.984375
+    }
+}
+
+/// Ease-in-out bounce
+public func easeInOutBounce<T: BinaryFloatingPoint>(_ t: T) -> T {
+    if t < 0.5 {
+        return 0.5 * easeInBounce(t * 2)
+    } else {
+        return 0.5 * easeOutBounce(t * 2 - 1) + 0.5
+    }
+}
+
+// MARK: - Sign and Utility Functions
+
+/// Returns the sign of a value (1 if positive or zero, -1 if negative)
+public func sign<T: BinaryFloatingPoint & SignedNumeric>(_ value: T) -> T {
+    value >= 0 ? 1 : -1
+}
+
+/// Returns a random sign (1 or -1) with equal probability
+public func randomSign() -> Float {
+    Float.random(in: 0..<1) < 0.5 ? 1 : -1
+}
+
+/// Returns a random sign (1 or -1) with equal probability (Double version)
+public func randomSignDouble() -> Double {
+    Double.random(in: 0..<1) < 0.5 ? 1 : -1
+}
