@@ -96,13 +96,17 @@ let v = Vector2D(x: 3, y: 4)  // Labeled initializer
 let v = SIMD2<Float>(3, 4)    // Also works (same type)
 ```
 
-**Collision types:**
-All collision types (AABB, Circle, Ray) are structs conforming to `Sendable, Hashable, Codable`.
-
-**Math utilities:**
-Prefer generic `BinaryFloatingPoint` constraints for utilities that work with Float and Double:
+**Math utilities vs SIMD extensions:**
+- Math utilities: Use generic `BinaryFloatingPoint` constraints (works with Float and Double)
+- SIMD extensions: Use concrete `where Scalar == Float` (game vectors are always Float)
 ```swift
+// Math utility — generic
 public func lerp<T: BinaryFloatingPoint>(_ a: T, _ b: T, _ t: T) -> T
+
+// SIMD extension — concrete
+extension SIMD2 where Scalar == Float {
+    public func distance(to other: Self) -> Float
+}
 ```
 
 ## GameMath Scope
