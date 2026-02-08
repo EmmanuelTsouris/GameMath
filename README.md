@@ -4,7 +4,7 @@ Pure Swift math library for game development with zero platform dependencies.
 
 [![CI](https://github.com/EmmanuelTsouris/GameMath/actions/workflows/ci.yml/badge.svg)](https://github.com/EmmanuelTsouris/GameMath/actions/workflows/ci.yml)
 [![Swift](https://img.shields.io/badge/Swift-6.2-orange.svg)](https://swift.org)
-[![Platforms](https://img.shields.io/badge/Platforms-iOS%20|%20macOS%20|%20tvOS%20|%20visionOS%20|%20Linux-lightgray.svg)](https://swift.org)
+[![Platforms](https://img.shields.io/badge/Platforms-iOS%20|%20macOS%20|%20tvOS%20|%20visionOS-lightgray.svg)](https://swift.org)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ## Features
@@ -176,14 +176,16 @@ randomBool()
 ## Requirements
 
 - Swift 6.2+
-- iOS 26.2+ / macOS 26.2+ / tvOS 26.2+ / visionOS 26.2+ / Linux
+- iOS 26.2+ / macOS 26.2+ / tvOS 26.2+ / visionOS 26.2+
 - Xcode 26.3+ (for Apple platforms)
+
+**Note:** GameMath requires Apple's SIMD framework and is not compatible with Linux.
 
 ## Why GameMath?
 
 - **Foundation-only**: No UIKit, AppKit, or SpriteKit dependencies
-- **Linux-compatible**: Use the same math code on servers and clients
 - **SIMD-optimized**: Leverages Apple's SIMD framework for performance
+- **Apple platforms only**: Designed specifically for iOS, macOS, tvOS, and visionOS
 - **Deterministic**: Seeded RNG ensures reproducible gameplay
 - **Sendable-safe**: Full Swift 6.2 concurrency support
 - **Well-tested**: Comprehensive test suite with swift-testing
